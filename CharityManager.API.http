@@ -1,0 +1,6 @@
+@CharityManager.API_HostAddress = http://localhost:5007
+
+GET {{CharityManager.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
