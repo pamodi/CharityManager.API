@@ -1,5 +1,9 @@
 using CharityManager.API.Data;
+using CharityManager.API.Repositories.Implementation;
+using CharityManager.API.Repositories.Interface;
 using CharityManager.API.Services;
+using CharityManager.API.Services.Implementation;
+using CharityManager.API.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
@@ -15,6 +19,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddCors(options =>
 {
@@ -26,16 +33,16 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowSpecificOrigins", policy =>
-    {
-        policy.WithOrigins("http://charityweb.runasp.net") // Add allowed client origins
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
-    });
-});
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowSpecificOrigins", policy =>
+//    {
+//        policy.WithOrigins("http://charityweb.runasp.net") // Add allowed client origins
+//              .AllowAnyHeader()
+//              .AllowAnyMethod()
+//              .AllowCredentials();
+//    });
+//});
 
 var app = builder.Build();
 
@@ -53,6 +60,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseCors("AllowAll");
-app.UseCors("AllowSpecificOrigins");
 
 app.Run();
