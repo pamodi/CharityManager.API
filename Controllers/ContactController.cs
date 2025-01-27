@@ -1,4 +1,5 @@
-﻿using CharityManager.API.Services.Interface;
+﻿using CharityManager.API.Model;
+using CharityManager.API.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CharityManager.API.Controllers
@@ -15,6 +16,7 @@ namespace CharityManager.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<UserModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetContacts()
         {
             var users = await _userService.GetUsersByRoleAsync("User");
@@ -25,6 +27,21 @@ namespace CharityManager.API.Controllers
             }
 
             return Ok(users);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(UserCreateRequest), StatusCodes.Status200OK)]
+        public IActionResult CreateUser([FromBody] UserCreateRequest userCreateRequest)
+        {
+            return Ok(_userService.CreateUser(userCreateRequest));
+        }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(UserUpdateRequest), StatusCodes.Status200OK)]
+        public IActionResult UpdateUser([FromQuery] int userId, [FromBody] UserUpdateRequest userUpdateRequest)
+        {
+            _userService.UpdateUser(userId, userUpdateRequest);
+            return Ok();
         }
     }
 }

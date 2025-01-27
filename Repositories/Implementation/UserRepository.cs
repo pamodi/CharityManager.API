@@ -1,6 +1,7 @@
 ﻿using CharityManager.API.Data;
 using CharityManager.API.Model;
 using CharityManager.API.Repositories.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace CharityManager.API.Repositories.Implementation
@@ -30,6 +31,45 @@ namespace CharityManager.API.Repositories.Implementation
                                      UpdatedAt = q.UpdatedAt,
                                      DeletedAt = q.DeletedAt
                                  }).ToListAsync();
+        }
+
+        public UserCreateResponse CreateUser(UserCreateRequest userCreateRequest)
+        {
+            if (_context.Users.Any(u => u.FirstName == userCreateRequest.FirstName || u.Email == userCreateRequest.Email))
+                throw new InvalidOperationException("User already exists.");
+
+            var user = new User
+            {
+                Role = "User",
+                FirstName = userCreateRequest.FirstName,
+                LastName = userCreateRequest.LastName,
+                Email = userCreateRequest.Email,
+                PhoneNumber = userCreateRequest.PhoneNumber,
+                WhatsApp = userCreateRequest.WhatsApp,
+                Address = userCreateRequest.Address,
+                Guid = Guid.NewGuid(),
+                Description = userCreateRequest.Description
+            };
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            return new UserCreateResponse { Id = user.Id };
+        }
+
+        public void UpdateUser(int userId, UserUpdateRequest userUpdateRequest)
+        {
+            var user = _context.Users.FirstOrDefault(q => q.Id == userId && q.DeletedAt == null) ?? throw new InvalidOperationException("User not found.");
+            
+            user.FirstName = userUpdateRequest.FirstName;
+            user.LastName = userUpdateRequest.LastName;
+            user.Email = userUpdateRequest.Email;
+            user.PhoneNumber = userUpdateRequest.PhoneNumber;
+            user.WhatsApp = userUpdateRequest.WhatsApp;
+            user.Address = userUpdateRequest.Address;
+            user.Description = userUpdateRequest.Description;
+
+            _context.SaveChanges();
         }
     }
 }

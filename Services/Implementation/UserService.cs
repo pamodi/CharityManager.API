@@ -17,5 +17,15 @@ namespace CharityManager.API.Services.Implementation
         {
             return await _userRepository.GetUsersByRoleAsync(role);
         }
+
+        public UserCreateResponse CreateUser(UserCreateRequest userCreateRequest)
+        {
+            return _userRepository.CreateUser(userCreateRequest);
+        }
+
+        public void UpdateUser(int userId, UserUpdateRequest userUpdateRequest)
+        {
+            _userRepository.UpdateUser(userId, userUpdateRequest);
+        }
     }
 }
