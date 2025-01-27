@@ -1,4 +1,4 @@
-﻿using CharityManager.API.Entity;
+﻿using CharityManager.API.Model;
 using CharityManager.API.Services;
 using Microsoft.AspNetCore.Mvc;
 

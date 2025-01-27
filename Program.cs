@@ -26,6 +26,17 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins", policy =>
+    {
+        policy.WithOrigins("http://charityweb.runasp.net") // Add allowed client origins
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -42,5 +53,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseCors("AllowAll");
+app.UseCors("AllowSpecificOrigins");
 
 app.Run();

@@ -1,5 +1,5 @@
 ﻿
-namespace CharityManager.API.Entity
+namespace CharityManager.API.Model
 {
     public class BaseModel
     {
