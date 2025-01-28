@@ -31,6 +31,28 @@ namespace CharityManager.API.Repositories.Implementation
                                  }).ToListAsync();
         }
 
+        public UserModel GetUserDetails(int userId)
+        {
+            var user = _context.Users.FirstOrDefault(q => q.Id == userId && q.DeletedAt == null) ?? throw new InvalidOperationException("User not found.");
+
+            return new UserModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                DisplayName = $"{user.FirstName} {user.LastName}",
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                Role = user.Role,
+                WhatsApp = user.WhatsApp,
+                Address = user.Address,
+                Guid = user.Guid,
+                Description = user.Description,
+                CreatedAt = user.CreatedAt,
+                UpdatedAt = user.UpdatedAt
+            };
+        }
+
         public UserCreateResponse CreateUser(UserCreateRequest userCreateRequest)
         {
             if (_context.Users.Any(u => ((u.FirstName == userCreateRequest.FirstName || u.Email == userCreateRequest.Email) && u.DeletedAt == null)))
