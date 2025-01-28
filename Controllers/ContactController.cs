@@ -31,6 +31,7 @@ namespace CharityManager.API.Controllers
 
         [HttpPost("CreateUser")]
         [ProducesResponseType(typeof(UserCreateRequest), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult CreateUser([FromBody] UserCreateRequest userCreateRequest)
         {
             return Ok(_userService.CreateUser(userCreateRequest));
@@ -38,9 +39,19 @@ namespace CharityManager.API.Controllers
 
         [HttpPut("{userId}", Name = "UpdateUser")]
         [ProducesResponseType(typeof(UserUpdateRequest), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult UpdateUser([FromRoute] int userId, [FromBody] UserUpdateRequest userUpdateRequest)
         {
             _userService.UpdateUser(userId, userUpdateRequest);
+            return Ok();
+        }
+
+        [HttpDelete("{userId}", Name = "DeleteUser")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult DeleteUser([FromRoute] int userId)
+        {
+            _userService.DeleteUser(userId);
             return Ok();
         }
     }

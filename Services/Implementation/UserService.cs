@@ -20,12 +20,22 @@ namespace CharityManager.API.Services.Implementation
 
         public UserCreateResponse CreateUser(UserCreateRequest userCreateRequest)
         {
-            return _userRepository.CreateUser(userCreateRequest);
+            var result = _userRepository.CreateUser(userCreateRequest);
+            _userRepository.SaveChanges();
+
+            return result;
         }
 
         public void UpdateUser(int userId, UserUpdateRequest userUpdateRequest)
         {
             _userRepository.UpdateUser(userId, userUpdateRequest);
+            _userRepository.SaveChanges();
+        }
+
+        public void DeleteUser(int userId)
+        {
+            _userRepository.DeleteUser(userId);
+            _userRepository.SaveChanges();
         }
     }
 }

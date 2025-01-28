@@ -2,14 +2,13 @@
 using CharityManager.API.Entity;
 using CharityManager.API.Model;
 using CharityManager.API.Repositories.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace CharityManager.API.Repositories.Implementation
 {
-    public class UserRepository(AppDbContext context) : IUserRepository
+    public class UserRepository(AppDbContext context) : BaseRepo(context), IUserRepository
     {
-        private readonly AppDbContext _context = context;
-
         public async Task<IEnumerable<UserModel>> GetUsersByRoleAsync(string role)
         {
             return await _context.Users
@@ -34,7 +33,7 @@ namespace CharityManager.API.Repositories.Implementation
 
         public UserCreateResponse CreateUser(UserCreateRequest userCreateRequest)
         {
-            if (_context.Users.Any(u => u.FirstName == userCreateRequest.FirstName || u.Email == userCreateRequest.Email))
+            if (_context.Users.Any(u => ((u.FirstName == userCreateRequest.FirstName || u.Email == userCreateRequest.Email) && u.DeletedAt == null)))
                 throw new InvalidOperationException("User already exists.");
 
             var user = new User
@@ -51,7 +50,6 @@ namespace CharityManager.API.Repositories.Implementation
             };
 
             _context.Users.Add(user);
-            _context.SaveChanges();
 
             return new UserCreateResponse { Id = user.Id };
         }
@@ -67,8 +65,13 @@ namespace CharityManager.API.Repositories.Implementation
             user.WhatsApp = userUpdateRequest.WhatsApp;
             user.Address = userUpdateRequest.Address;
             user.Description = userUpdateRequest.Description;
+        }
 
-            _context.SaveChanges();
+        public void DeleteUser(int userId)
+        {
+            var user = _context.Users.FirstOrDefault(q => q.Id == userId && q.DeletedAt == null) ?? throw new InvalidOperationException("User not found.");
+
+            user.MarkAsDelete<User>();
         }
     }
 }

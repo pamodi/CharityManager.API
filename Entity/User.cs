@@ -1,6 +1,6 @@
 ﻿namespace CharityManager.API.Entity
 {
-    public class User : BaseModel
+    public class User : BaseModel, ISupportSoftDelete
     {
         public int Id { get; set; }
         public string? Username { get; set; }
