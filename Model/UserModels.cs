@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CharityManager.API.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace CharityManager.API.Model
 {

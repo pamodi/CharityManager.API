@@ -1,7 +1,7 @@
 ﻿using CharityManager.API.Data;
+using CharityManager.API.Entity;
 using CharityManager.API.Model;
 using CharityManager.API.Repositories.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace CharityManager.API.Repositories.Implementation
@@ -13,7 +13,7 @@ namespace CharityManager.API.Repositories.Implementation
         public async Task<IEnumerable<UserModel>> GetUsersByRoleAsync(string role)
         {
             return await _context.Users
-                                 .Where(u => u.Role == role)
+                                 .Where(u => u.Role == role && u.DeletedAt == null)
                                  .Select(q => new UserModel()
                                  {
                                      Id = q.Id,
@@ -28,8 +28,7 @@ namespace CharityManager.API.Repositories.Implementation
                                      Guid = q.Guid,
                                      Description = q.Description,
                                      CreatedAt = q.CreatedAt,
-                                     UpdatedAt = q.UpdatedAt,
-                                     DeletedAt = q.DeletedAt
+                                     UpdatedAt = q.UpdatedAt
                                  }).ToListAsync();
         }
 

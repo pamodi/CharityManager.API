@@ -1,5 +1,5 @@
 ﻿using CharityManager.API.Data;
-using CharityManager.API.Model;
+using CharityManager.API.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CharityManager.API.Services

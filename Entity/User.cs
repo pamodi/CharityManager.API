@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CharityManager.API.Model
+﻿namespace CharityManager.API.Entity
 {
     public class User : BaseModel
     {
@@ -16,21 +14,6 @@ namespace CharityManager.API.Model
         public string? Address { get; set; }
         public Guid Guid { get; set; }
         public string? Description { get; set; }
-    }
-
-    public class LoginRequest
-    {
-        [Required]
-        public string Username { get; set; }
-
-        [Required, MinLength(6)]
-        public string Password { get; set; }
-    }
-
-    public class LoginResponse
-    {
-        public string Role { get; set; }
-        public bool IsSuccess { get; set; }
-        public string Message { get; set; }
+        public DateTimeOffset? DeletedAt { get; set; }
     }
 }

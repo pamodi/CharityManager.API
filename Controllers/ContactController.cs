@@ -15,7 +15,7 @@ namespace CharityManager.API.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetUsers")]
         [ProducesResponseType(typeof(IEnumerable<UserModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetContacts()
         {
@@ -29,16 +29,16 @@ namespace CharityManager.API.Controllers
             return Ok(users);
         }
 
-        [HttpPost]
+        [HttpPost("CreateUser")]
         [ProducesResponseType(typeof(UserCreateRequest), StatusCodes.Status200OK)]
         public IActionResult CreateUser([FromBody] UserCreateRequest userCreateRequest)
         {
             return Ok(_userService.CreateUser(userCreateRequest));
         }
 
-        [HttpPut]
+        [HttpPut("{userId}", Name = "UpdateUser")]
         [ProducesResponseType(typeof(UserUpdateRequest), StatusCodes.Status200OK)]
-        public IActionResult UpdateUser([FromQuery] int userId, [FromBody] UserUpdateRequest userUpdateRequest)
+        public IActionResult UpdateUser([FromRoute] int userId, [FromBody] UserUpdateRequest userUpdateRequest)
         {
             _userService.UpdateUser(userId, userUpdateRequest);
             return Ok();
