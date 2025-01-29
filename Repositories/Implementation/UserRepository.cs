@@ -60,7 +60,7 @@ namespace CharityManager.API.Repositories.Implementation
 
             var user = new User
             {
-                Role = "User",
+                Role = "USER",
                 FirstName = userCreateRequest.FirstName,
                 LastName = userCreateRequest.LastName,
                 Email = userCreateRequest.Email,

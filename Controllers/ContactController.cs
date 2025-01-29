@@ -19,7 +19,7 @@ namespace CharityManager.API.Controllers
         [ProducesResponseType(typeof(IEnumerable<UserModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _userService.GetUsersByRoleAsync("User");
+            var users = await _userService.GetUsersByRoleAsync("USER");
 
             if (users == null || !users.Any())
             {
