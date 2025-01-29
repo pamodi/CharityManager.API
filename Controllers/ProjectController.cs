@@ -1,4 +1,5 @@
 ﻿using CharityManager.API.Model;
+using CharityManager.API.Services.Implementation;
 using CharityManager.API.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +46,14 @@ namespace CharityManager.API.Controllers
         public IActionResult GetProjectDetails([FromRoute] int projectId)
         {
             return Ok(_projectService.GetProjectDetails(projectId));
+        }
+
+        [HttpPost(Name = "CreateProject")]
+        [ProducesResponseType(typeof(ProjectCreateRequest), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult CreateProject([FromBody] ProjectCreateRequest projectCreateRequest)
+        {
+            return Ok(_projectService.CreateProject(projectCreateRequest));
         }
     }
 }

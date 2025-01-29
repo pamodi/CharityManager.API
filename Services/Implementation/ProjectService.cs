@@ -28,5 +28,13 @@ namespace CharityManager.API.Services.Implementation
         {
             return _projectRepository.GetProjectDetails(projectId);
         }
+
+        public ProjectCreateResponse CreateProject(ProjectCreateRequest projectCreateRequest)
+        {
+            var result = _projectRepository.CreateProject(projectCreateRequest);
+            _projectRepository.SaveChanges();
+
+            return result;
+        }
     }
 }

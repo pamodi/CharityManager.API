@@ -59,5 +59,24 @@ namespace CharityManager.API.Repositories.Implementation
                 UpdatedAt = project.UpdatedAt
             };
         }
+
+        public ProjectCreateResponse CreateProject(ProjectCreateRequest projectCreateRequest)
+        {
+            if (_context.Projects.Any(u => u.Name == projectCreateRequest.Name && u.DeletedAt == null))
+                throw new InvalidOperationException("Project already exists.");
+
+            var project = new Project
+            {
+                Name = projectCreateRequest.Name,
+                Description = projectCreateRequest.Description,
+                Status = projectCreateRequest.Status,
+                Category = projectCreateRequest.Category,
+                Coordinator = projectCreateRequest.Coordinator
+            };
+
+            _context.Projects.Add(project);
+
+            return new ProjectCreateResponse { Id = project.Id };
+        }
     }
 }
