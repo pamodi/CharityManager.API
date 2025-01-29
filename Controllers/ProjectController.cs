@@ -38,5 +38,13 @@ namespace CharityManager.API.Controllers
 
             return Ok(projects);
         }
+
+        [HttpGet("{projectId}", Name = "GetProjectDetails")]
+        [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetProjectDetails([FromRoute] int projectId)
+        {
+            return Ok(_projectService.GetProjectDetails(projectId));
+        }
     }
 }

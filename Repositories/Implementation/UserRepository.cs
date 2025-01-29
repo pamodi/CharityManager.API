@@ -2,7 +2,6 @@
 using CharityManager.API.Entity;
 using CharityManager.API.Model;
 using CharityManager.API.Repositories.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace CharityManager.API.Repositories.Implementation

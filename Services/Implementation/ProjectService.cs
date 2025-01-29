@@ -1,4 +1,5 @@
 ﻿using CharityManager.API.Model;
+using CharityManager.API.Repositories.Implementation;
 using CharityManager.API.Repositories.Interface;
 using CharityManager.API.Services.Interface;
 
@@ -21,6 +22,11 @@ namespace CharityManager.API.Services.Implementation
         public async Task<IEnumerable<ProjectModel>> GetPendingProjectsAsync()
         {
             return await _projectRepository.GetPendingProjectsAsync();
+        }
+
+        public ProjectModel GetProjectDetails(int projectId)
+        {
+            return _projectRepository.GetProjectDetails(projectId);
         }
     }
 }
