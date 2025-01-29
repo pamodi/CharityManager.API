@@ -55,5 +55,14 @@ namespace CharityManager.API.Controllers
         {
             return Ok(_projectService.CreateProject(projectCreateRequest));
         }
+
+        [HttpPut("{projectId}", Name = "UpdateProject")]
+        [ProducesResponseType(typeof(ProjectUpdateRequest), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult UpdateProject([FromRoute] int projectId, [FromBody] ProjectUpdateRequest projectUpdateRequest)
+        {
+            _projectService.UpdateProject(projectId, projectUpdateRequest);
+            return Ok();
+        }
     }
 }

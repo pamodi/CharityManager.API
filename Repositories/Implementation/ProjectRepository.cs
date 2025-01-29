@@ -78,5 +78,16 @@ namespace CharityManager.API.Repositories.Implementation
 
             return new ProjectCreateResponse { Id = project.Id };
         }
+
+        public void UpdateProject(int projectId, ProjectUpdateRequest projectUpdateRequest)
+        {
+            var project = _context.Projects.FirstOrDefault(q => q.Id == projectId && q.DeletedAt == null) ?? throw new InvalidOperationException("Project not found.");
+
+            project.Name = projectUpdateRequest.Name;
+            project.Description = projectUpdateRequest.Description;
+            project.Status = projectUpdateRequest.Status;
+            project.Category = projectUpdateRequest.Category;
+            project.Coordinator = projectUpdateRequest.Coordinator;
+        }
     }
 }

@@ -27,4 +27,8 @@ namespace CharityManager.API.Model
     {
         public int Id { get; set; }
     }
+
+    public class ProjectUpdateRequest : ProjectCreateRequest
+    {
+    }
 }

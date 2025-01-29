@@ -1,4 +1,5 @@
-﻿using CharityManager.API.Model;
+﻿using CharityManager.API.Entity;
+using CharityManager.API.Model;
 using CharityManager.API.Repositories.Implementation;
 using CharityManager.API.Repositories.Interface;
 using CharityManager.API.Services.Interface;
@@ -35,6 +36,12 @@ namespace CharityManager.API.Services.Implementation
             _projectRepository.SaveChanges();
 
             return result;
+        }
+
+        public void UpdateProject(int projectId, ProjectUpdateRequest projectUpdateRequest)
+        {
+            _projectRepository.UpdateProject(projectId, projectUpdateRequest);
+            _projectRepository.SaveChanges();
         }
     }
 }

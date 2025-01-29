@@ -8,5 +8,6 @@ namespace CharityManager.API.Services.Interface
         Task<IEnumerable<ProjectModel>> GetPendingProjectsAsync();
         ProjectModel GetProjectDetails(int projectId);
         ProjectCreateResponse CreateProject(ProjectCreateRequest projectCreateRequest);
+        void UpdateProject(int projectId, ProjectUpdateRequest projectUpdateRequest);
     }
 }
