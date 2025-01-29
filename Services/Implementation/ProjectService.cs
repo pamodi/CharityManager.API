@@ -43,5 +43,11 @@ namespace CharityManager.API.Services.Implementation
             _projectRepository.UpdateProject(projectId, projectUpdateRequest);
             _projectRepository.SaveChanges();
         }
+
+        public void DeleteProject(int projectId)
+        {
+            _projectRepository.DeleteProject(projectId);
+            _projectRepository.SaveChanges();
+        }
     }
 }

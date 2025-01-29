@@ -1,5 +1,4 @@
 ﻿using CharityManager.API.Model;
-using CharityManager.API.Services.Implementation;
 using CharityManager.API.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -62,6 +61,15 @@ namespace CharityManager.API.Controllers
         public IActionResult UpdateProject([FromRoute] int projectId, [FromBody] ProjectUpdateRequest projectUpdateRequest)
         {
             _projectService.UpdateProject(projectId, projectUpdateRequest);
+            return Ok();
+        }
+
+        [HttpDelete("{projectId}", Name = "DeleteProject")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult DeleteProject([FromRoute] int projectId)
+        {
+            _projectService.DeleteProject(projectId);
             return Ok();
         }
     }

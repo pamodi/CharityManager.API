@@ -9,5 +9,6 @@ namespace CharityManager.API.Repositories.Interface
         ProjectModel GetProjectDetails(int projectId);
         ProjectCreateResponse CreateProject(ProjectCreateRequest projectCreateRequest);
         void UpdateProject(int projectId, ProjectUpdateRequest projectUpdateRequest);
+        void DeleteProject(int projectId);
     }
 }

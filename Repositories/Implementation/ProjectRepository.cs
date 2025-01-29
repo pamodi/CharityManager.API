@@ -89,5 +89,12 @@ namespace CharityManager.API.Repositories.Implementation
             project.Category = projectUpdateRequest.Category;
             project.Coordinator = projectUpdateRequest.Coordinator;
         }
+
+        public void DeleteProject(int projectId)
+        {
+            var project = _context.Projects.FirstOrDefault(q => q.Id == projectId && q.DeletedAt == null) ?? throw new InvalidOperationException("Project not found.");
+
+            project.MarkAsDelete<User>();
+        }
     }
 }
