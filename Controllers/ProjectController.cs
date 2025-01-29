@@ -26,5 +26,17 @@ namespace CharityManager.API.Controllers
 
             return Ok(projects);
         }
+
+        [HttpGet("pending", Name = "GetPendingProjects")]
+        [ProducesResponseType(typeof(IEnumerable<ProjectModel>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetPendingProjects()
+        {
+            var projects = await _projectService.GetPendingProjectsAsync();
+
+            if (projects == null || !projects.Any())
+                return NotFound("No pending projects found.");
+
+            return Ok(projects);
+        }
     }
 }

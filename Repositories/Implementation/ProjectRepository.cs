@@ -24,5 +24,22 @@ namespace CharityManager.API.Repositories.Implementation
                                      UpdatedAt = q.UpdatedAt
                                  }).ToListAsync();
         }
+
+        public async Task<IEnumerable<ProjectModel>> GetPendingProjectsAsync()
+        {
+            return await _context.Projects
+                                 .Where(u => u.Status != "Completed" && u.DeletedAt == null)
+                                 .Select(q => new ProjectModel()
+                                 {
+                                     Id = q.Id,
+                                     Name = q.Name,
+                                     Description = q.Description,
+                                     Status = q.Status,
+                                     Category = q.Category,
+                                     Coordinator = q.Coordinator,
+                                     CreatedAt = q.CreatedAt,
+                                     UpdatedAt = q.UpdatedAt
+                                 }).ToListAsync();
+        }
     }
 }

@@ -17,5 +17,10 @@ namespace CharityManager.API.Services.Implementation
         {
             return await _projectRepository.GetProjectsAsync();
         }
+
+        public async Task<IEnumerable<ProjectModel>> GetPendingProjectsAsync()
+        {
+            return await _projectRepository.GetPendingProjectsAsync();
+        }
     }
 }
