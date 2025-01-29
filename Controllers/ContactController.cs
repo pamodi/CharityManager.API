@@ -22,9 +22,7 @@ namespace CharityManager.API.Controllers
             var users = await _userService.GetUsersByRoleAsync("USER");
 
             if (users == null || !users.Any())
-            {
                 return NotFound("No users found.");
-            }
 
             return Ok(users);
         }
