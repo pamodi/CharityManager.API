@@ -20,7 +20,7 @@ namespace CharityManager.API.Controllers
                 return Unauthorized(new LoginResponse() { DisplayName = "", IsSuccess = false, Role = "", Message = "Invalid credentials." });
             }
 
-            var displayName = user.FirstName + " " + user.LastName;
+            var displayName = user.FirstName + " " + user.LastName + " " + (user.Role == "ADMIN" ? " (Admin)" : "(User)");
             return Ok(new LoginResponse() {  DisplayName = displayName, IsSuccess = true, Role = user.Role, Message = "Login successful." });
         }
     }
