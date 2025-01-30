@@ -17,10 +17,11 @@ namespace CharityManager.API.Controllers
 
             if (user == null)
             {
-                return Unauthorized(new LoginResponse() { IsSuccess = false, Role = "", Message = "Invalid credentials." });
+                return Unauthorized(new LoginResponse() { DisplayName = "", IsSuccess = false, Role = "", Message = "Invalid credentials." });
             }
 
-            return Ok(new LoginResponse() { IsSuccess = true, Role = user.Role, Message = "Login successful." });
+            var displayName = user.FirstName + " " + user.LastName;
+            return Ok(new LoginResponse() {  DisplayName = displayName, IsSuccess = true, Role = user.Role, Message = "Login successful." });
         }
     }
 }

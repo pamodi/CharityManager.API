@@ -10,7 +10,7 @@ namespace CharityManager.API.Services
 
         public async Task<User?> ValidateUser(string username, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
 
             if (user == null) return null;
 
