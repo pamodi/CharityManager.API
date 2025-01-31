@@ -13,6 +13,7 @@ namespace CharityManager.API.Model
 
     public class LoginResponse
     {
+        public int Id { get; set; }
         public string DisplayName { get; set; }
         public string Role { get; set; }
         public bool IsSuccess { get; set; }

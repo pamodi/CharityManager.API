@@ -21,7 +21,7 @@ namespace CharityManager.API.Controllers
             }
 
             var displayName = user.FirstName + " " + user.LastName + " " + (user.Role == "ADMIN" ? " (Admin)" : "(User)");
-            return Ok(new LoginResponse() {  DisplayName = displayName, IsSuccess = true, Role = user.Role, Message = "Login successful." });
+            return Ok(new LoginResponse() {  Id = user.Id, DisplayName = displayName, IsSuccess = true, Role = user.Role, Message = "Login successful." });
         }
     }
 }
