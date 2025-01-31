@@ -12,13 +12,17 @@ namespace CharityManager.API.Model
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
         public string? WhatsApp { get; set; }
-        public string? Address { get; set; }
+        public string? Street { get; set; }
+        public string? City { get; set; }
+        public string? Province { get; set; }
+        public string? Country { get; set; }
+        public string? PostalCode { get; set; }
         public string Role { get; set; }
         public Guid Guid { get; set; }
         public string? Description { get; set; }
     }
 
-    public class UserCreateRequest
+    public class UserCreateRequest : AddressModel
     {
         [Required]
         public string FirstName { get; set; }
@@ -29,6 +33,15 @@ namespace CharityManager.API.Model
         public string? WhatsApp { get; set; }
         public string? Address { get; set; }
         public string? Description { get; set; }
+    }
+
+    public class AddressModel
+    {
+        public string? Street { get; set; }
+        public string? City { get; set; }
+        public string? Province { get; set; }
+        public string? Country { get; set; }
+        public string? PostalCode { get; set; }
     }
 
     public class UserCreateResponse
