@@ -116,6 +116,3 @@ ALTER TABLE [Projects] ALTER COLUMN [Category] nvarchar(100) NULL;
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20250130153518_UpdateSizeOfColumns', N'9.0.1');
-
-COMMIT;
-GO

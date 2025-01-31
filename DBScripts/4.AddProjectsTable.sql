@@ -13,6 +13,3 @@ CREATE TABLE [Projects] (
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20250129164032_AddProjectsTable', N'9.0.1');
-
-COMMIT;
-GO

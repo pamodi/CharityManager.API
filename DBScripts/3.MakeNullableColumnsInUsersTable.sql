@@ -16,6 +16,3 @@ ALTER TABLE [Users] ALTER COLUMN [PasswordHash] nvarchar(max) NULL;
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20250127203751_MakeNullableColumnsInUsersTable', N'9.0.1');
-
-COMMIT;
-GO
